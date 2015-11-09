@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109224005) do
+ActiveRecord::Schema.define(version: 20151109230757) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
+  end
+
+  add_index "authors", ["email"], name: "index_authors_on_email", unique: true
+  add_index "authors", ["invitation_token"], name: "index_authors_on_invitation_token", unique: true
+  add_index "authors", ["invitations_count"], name: "index_authors_on_invitations_count"
+  add_index "authors", ["invited_by_id"], name: "index_authors_on_invited_by_id"
+  add_index "authors", ["reset_password_token"], name: "index_authors_on_reset_password_token", unique: true
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -33,6 +62,7 @@ ActiveRecord::Schema.define(version: 20151109224005) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
