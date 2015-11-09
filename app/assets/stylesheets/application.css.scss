@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+nav ul li {
+  list-style: none;  
+  display: inline;
+  a {
+    text-decoration: none;
+  }
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
